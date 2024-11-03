@@ -1,14 +1,14 @@
 import numpy as np
 
 # gather laser wavelength
-wavelength_str = input("Enter Laser Wavelength, 210-6700 um: ")
-wavelength = float(wavelength_str)  # Use float instead of int
+wavelength_str = input("Enter Laser Wavelength, 210-6700 nm: ")
+wavelength = float(wavelength_str) /1000
 
 # SiO2 coefficients
 b1_array = [0.6961663,0.4079426,0.8974794]
 c1_array_root = [0.0684043,0.1162414,9.896161]
 
-
+#Doped SiO2 coefficients
 b2_array = [0.7072363,0.4389641,0.8931482]
 c2_array = [0.0684611,0.1200138,10.090738]
 
@@ -26,10 +26,6 @@ def coreRefractionIndex(wavelength):
     return n
 print(coreRefractionIndex(wavelength))
 
-
-
-
-#FIX!!!!
 #Sellmeier's Equation, SiO2 + B2O2 Dopant (Outer cladding)
 def cladRefractionIndex(wavelength):
     contributions2 = []
@@ -37,18 +33,27 @@ def cladRefractionIndex(wavelength):
         #perform operations and append
          calculate_term2 = (b2 * wavelength**2) / (wavelength**2 - c2**2)
          contributions2.append(calculate_term2)
-         clad_refraction = 1 + sum(contributions2)
-         u = np.sqrt(clad_refraction)
-         return u
+    clad_refraction = 1 + sum(contributions2)
+    u = np.sqrt(clad_refraction)
+    return u
 print(cladRefractionIndex(wavelength))
 
-#Critical Angel Required for total reflection
-def snellsCriticalAngle(coreRefractionIndex, cladRefractionIndex):
-    critical_angle = np.arcsin(cladRefractionIndex(wavelength)/coreRefractionIndex(wavelength))
-    ca = critical_angle
-    return f" the critical angle is {ca}"
-print(snellsCriticalAngle(coreRefractionIndex,cladRefractionIndex))
+#Critical Angle Required for total internal reflection
+def snellsCriticalAngle(cladRefractionIndex, coreRefractionIndex ):
+    critical_angle_radians = np.arcsin(coreRefractionIndex(wavelength)/cladRefractionIndex(wavelength))
+    critical_angle = np.degrees(critical_angle_radians)
+    return critical_angle
+print(snellsCriticalAngle(cladRefractionIndex, coreRefractionIndex))
 
+"""
+#Finding NA, for acceptance cone angle
+def numericalAp(cladRefractionIndex,coreRefractionIndex):
+    na = np.sqrt(coreRefractionIndex(wavelength)**2 - cladRefractionIndex(wavelength)**2)
+    acceptance_cone = np.arcsin(na)
+    full_acceptance = acceptance_cone * 2
+    return full_acceptance
+print(numericalAp(cladRefractionIndex,coreRefractionIndex))
+"""
 
 #Entrance angle adjustment
 #def snellsLaw(coreRefractionIndex, cladRefractionIndex):
