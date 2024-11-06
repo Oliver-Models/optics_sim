@@ -43,18 +43,8 @@ def snellsCriticalAngle(cladRefractionIndex, coreRefractionIndex ):
     critical_angle = np.degrees(shorten_arcsin)
     return critical_angle
 
-#def acceptanceCone():
 
-#def attenuation():
-
-#def dispersion():
-
-#def speedOverTime():
-
-
-#Total refraction- error checker:
-#def snellsRefraction(cladRefractionIndex, coreRefractionIndex):
-
+calc_df = pd.DataFrame(index=['Core Refraction', 'Cladding Refraction', 'Critical Angle'])
 
 while True:
     # gather laser wavelength
@@ -70,25 +60,33 @@ while True:
         core_I = coreRefractionIndex(wavelength)
         clad_I = cladRefractionIndex(wavelength)
         critical_A = snellsCriticalAngle(cladRefractionIndex, coreRefractionIndex)
+        wavelength_Append = wavelength
 
-    result = {
-        "Wavelength (nm)": [wavelength],
-        "Core Refraction": [core_I],
-        "Clad Refraction": [clad_I],
-        "Critical Angle": [critical_A]
-    }
+ #new_column = pd.Series([core_I, clad_I, critical_A], index=calc_df.columns, name=wavelength_str + " nm")
+        
 
     #Data frame
     calc_df = pd.DataFrame([core_I, clad_I, critical_A])
-    calc_df[wavelength_str + " nm"] = [core_I, clad_I, critical_A]
-    calc_df.index = ['Core Refraction', 'Cladding Refraction', 'Critical Angle']
+    column_name = wavelength_str
+    calc_df[column_name] = ([core_I, clad_I, critical_A])
+
     #temp solution. add dynamic pandas later. 
-    del calc_df[0]
     print(calc_df)
 
         
 
 
+#def acceptanceCone():
+
+#def attenuation():
+
+#def dispersion():
+
+#def speedOverTime():
+
+
+#Total refraction- error checker:
+#def snellsRefraction(cladRefractionIndex, coreRefractionIndex):
 """
 #Finding NA, for acceptance cone angle
 def numericalAp(cladRefractionIndex,coreRefractionIndex):
