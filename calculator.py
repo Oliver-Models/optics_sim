@@ -44,33 +44,42 @@ def snellsCriticalAngle(cladRefractionIndex, coreRefractionIndex ):
     return critical_angle
 
 
+
+
 calc_df = pd.DataFrame(index=['Core Refraction', 'Cladding Refraction', 'Critical Angle'])
 
-while True:
+class input:
+    while True:
     # gather laser wavelength
-    wavelength_str = input("Enter Laser Wavelength, 210-6700 nm or type 'exit' to quit: ")
+        
+        if wavelength_str.lower() == 'exit':
+            print("Exiting program")
+            break
 
-    if wavelength_str.lower() == 'exit':
-        print("Exiting program")
-        break
+        else:
+            wavelength = float(wavelength_str) / 1000
 
-    else:
-        wavelength = float(wavelength_str) / 1000
+        for input in calc_df:
+            wavelength_str = input("Enter Laser Wavelength, 210-6700 nm or type 'exit' to quit: ")
+            core_I = coreRefractionIndex(wavelength)
+            clad_I = cladRefractionIndex(wavelength)
+            critical_A = snellsCriticalAngle(cladRefractionIndex, coreRefractionIndex)
+            wavelength_Append = wavelength
 
-        core_I = coreRefractionIndex(wavelength)
-        clad_I = cladRefractionIndex(wavelength)
-        critical_A = snellsCriticalAngle(cladRefractionIndex, coreRefractionIndex)
-        wavelength_Append = wavelength
+            calc_df = pd.DataFrame([core_I, clad_I, critical_A])
+
 
  #new_column = pd.Series([core_I, clad_I, critical_A], index=calc_df.columns, name=wavelength_str + " nm")
         
 
     #Data frame
-    calc_df = pd.DataFrame([core_I, clad_I, critical_A])
-    column_name = wavelength_str
-    calc_df[column_name] = ([core_I, clad_I, critical_A])
+    
+
+    
+        
 
     #temp solution. add dynamic pandas later. 
+    
     print(calc_df)
 
         
