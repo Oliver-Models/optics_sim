@@ -21,7 +21,22 @@ input("Select MMF Model (1-5): ")
 
 
 
+<<<<<<< Updated upstream
 class FiberModel:
+=======
+
+
+class FiberModel():
+    
+    #Doped SiO2 coefficients (core)
+    b1_array = [0.7072363,0.4389641,0.8931482]
+    c1_array = [0.0684611,0.1200138,10.090738]
+    # SiO2 coefficients (clad)
+    b2_array = [0.6961663,0.4079426,0.8974794]
+    c2_array = [0.0684043,0.1162414,9.896161]
+
+
+>>>>>>> Stashed changes
     def __init__(self, model_type, standard_date, bandwidth, core_size, jacket_color, light_source, application):
         self.model_type = model_type
         self.standard_date = standard_date
@@ -30,6 +45,7 @@ class FiberModel:
         self.jacket_color = jacket_color
         self.light_source = light_source
         self.application = application
+<<<<<<< Updated upstream
 
 class FiberOptics:
     
@@ -45,6 +61,11 @@ class FiberOptics:
     def __init__(self):
         return None
 
+=======
+    
+
+class Light():
+>>>>>>> Stashed changes
     #gather laser wavelength
     def wavelength():
         wavelength_nm = float(input("Input laser wavelength 210-6700nm: "))
@@ -105,6 +126,8 @@ class FiberOptics:
         energy = planksConstant *  self.speedOfLightSilicon(wavelength_um) / wavelength_um
         return energy
 
+
+class Laser():
     # Photon flux calculation with assumed power
     def photonFlux(self,wavelength_um):
         energy_per_photon = self.photonEnergy(wavelength_um)
@@ -113,6 +136,10 @@ class FiberOptics:
 
     #attenuation code here (dispersion and scatter)
 
+<<<<<<< Updated upstream
+=======
+"""
+>>>>>>> Stashed changes
 coreRI = FiberOptics.coreRefractionIndex(FiberOptics,wavelength_um=input)
 cladRI = FiberOptics.cladRefractionIndex(FiberOptics,wavelength_um=input)
 criticalA = FiberOptics.snellsCriticalAngle(FiberOptics,wavelength_um=input)
@@ -124,6 +151,13 @@ print(f"Core R: {coreRI}")
 print(f"Clad R: {cladRI}")
 print(f"Critical A: {criticalA}")
 print(f"Photon Flux: {photonF} photons per second")
+<<<<<<< Updated upstream
+=======
+
+"""
+
+
+>>>>>>> Stashed changes
 
 """
 calc_df = pd.DataFrame(index=['Core Refraction', 'Cladding Refraction', 'Critical Angle'])
