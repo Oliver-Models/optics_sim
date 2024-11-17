@@ -23,7 +23,7 @@ c2_array = [0.0684611,0.1200138,10.090738]
 def coreRefractionIndex(wavelength):
     contributions2 = []
     for b2, c2 in zip(b2_array, c2_array):
-        #perform operations and append
+        #perform operations and append 
          calculate_term2 = (b2 * wavelength**2) / (wavelength**2 - c2**2)
          contributions2.append(calculate_term2)
     core_refraction = 1 + sum(contributions2)
@@ -45,6 +45,7 @@ def cladRefractionIndex(wavelength):
 
 #Critical Angle /Required for total internal reflection
 def snellsCriticalAngle(cladRefractionIndex, coreRefractionIndex):
+
     critical_angle_radians = cladRefractionIndex(wavelength)/coreRefractionIndex(wavelength)
     shorten_arcsin = np.arcsin(critical_angle_radians)
     critical_angle = np.degrees(shorten_arcsin)
@@ -67,14 +68,14 @@ def photonFlux(wavelength):
     return flux
 
 #attenuation
-def attenuation(wavelength):
+#def attenuation(wavelength):
     
     
 coreRI = coreRefractionIndex(wavelength)
 cladRI = cladRefractionIndex(wavelength)
 criticalA = snellsCriticalAngle(cladRefractionIndex, coreRefractionIndex)
 print(f"Photon Flux: {photonFlux(wavelength)} photons per second")
-print(f"Critical Angle: {snellsCriticalAngle(wavelength)} degrees")
+print(f"Critical Angle: {snellsCriticalAngle(cladRefractionIndex, coreRefractionIndex)} degrees")
 
 print(f"Core R: {coreRI}")
 print(f"Clad R: {cladRI}")
