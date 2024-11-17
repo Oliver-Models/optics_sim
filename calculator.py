@@ -13,7 +13,11 @@ wavelength = float(wavelength)
 wavelength = wavelength / 1000
 
 #gather fiber length
-fiberLength = float(input("Enter fiber length in kilometers"))
+fiberLength = float(input("Enter fiber length in kilometers: "))
+
+#add mmf circumference so we can calculate how far the light is traveling, and approx. 
+#how many times it bounces
+
 # SiO2 coefficients
 b1_array = [0.6961663,0.4079426,0.8974794]
 c1_array_root = [0.0684043,0.1162414,9.896161]
@@ -83,43 +87,9 @@ print(f"Core R: {coreRI}")
 print(f"Clad R: {cladRI}")
 
 """
-calc_df = pd.DataFrame(index=['Core Refraction', 'Cladding Refraction', 'Critical Angle'])
-
-class input:
-    while True:
-    # gather laser wavelength
-        
-        if wavelength_str.lower() == 'exit':
-            print("Exiting program")
-            break
-
-        else:
-            wavelength = float(wavelength_str) / 1000
-
-        for input in calc_df:
-            wavelength_str = input("Enter Laser Wavelength, 210-6700 nm or type 'exit' to quit: ")
-            core_I = coreRefractionIndex(wavelength)
-            clad_I = cladRefractionIndex(wavelength)
-            critical_A = snellsCriticalAngle(cladRefractionIndex, coreRefractionIndex)
-            wavelength_Append = wavelength
-
-            calc_df = pd.DataFrame([core_I, clad_I, critical_A])
-
-
- #new_column = pd.Series([core_I, clad_I, critical_A], index=calc_df.columns, name=wavelength_str + " nm")
-"""      
-
-#Data frame
-#temp solution. add dynamic pandas later. 
-#print(calc_df)
-#def acceptanceCone():
-#def dispersion():
-#def speedOverTime():
-
-
 #Total refraction- error checker:
 #def snellsRefraction(cladRefractionIndex, coreRefractionIndex):
-"""
+"""""""
 #Finding NA, for acceptance cone angle
 def numericalAp(cladRefractionIndex,coreRefractionIndex):
     na = np.sqrt(coreRefractionIndex(wavelength)**2 - cladRefractionIndex(wavelength)**2)
@@ -128,27 +98,24 @@ def numericalAp(cladRefractionIndex,coreRefractionIndex):
     return full_acceptance
 print(numericalAp(cladRefractionIndex,coreRefractionIndex))
 """
-
-
-"""
+#Data frame
+#temp solution. add dynamic pandas later. 
+#print(calc_df)
+#def acceptanceCone():
+#def dispersion():
+#def speedOverTime():
 
 #adjustable mmf variables. add feature sooner
-
 
 #sio2
 
 #include industry standards
-def mmfCircumference():
+#def mmfCircumference():
 
+#def mmfLength():
 
-def mmfLength():
+#def temperature():
 
-
-def temperature():
-
-
-def noise():
-
+#def noise():
 
 #Ideal BER calculations. Healthy variance.
-"""
