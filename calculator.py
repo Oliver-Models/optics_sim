@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import matplotlib as plt
 
 #constants
 speedOfLight = 2.99792458 * 10**8 #m/s
@@ -11,6 +12,8 @@ wavelength = input("Input laser wavelength 210-6700nm: ")
 wavelength = float(wavelength)
 wavelength = wavelength / 1000
 
+#gather fiber length
+fiberLength = float(input("Enter fiber length in kilometers"))
 # SiO2 coefficients
 b1_array = [0.6961663,0.4079426,0.8974794]
 c1_array_root = [0.0684043,0.1162414,9.896161]
@@ -70,16 +73,14 @@ def photonFlux(wavelength):
 #attenuation
 #def attenuation(wavelength):
     
-    
 coreRI = coreRefractionIndex(wavelength)
 cladRI = cladRefractionIndex(wavelength)
 criticalA = snellsCriticalAngle(cladRefractionIndex, coreRefractionIndex)
+
 print(f"Photon Flux: {photonFlux(wavelength)} photons per second")
 print(f"Critical Angle: {snellsCriticalAngle(cladRefractionIndex, coreRefractionIndex)} degrees")
-
 print(f"Core R: {coreRI}")
 print(f"Clad R: {cladRI}")
-print(f"Critical A: {criticalA}")
 
 """
 calc_df = pd.DataFrame(index=['Core Refraction', 'Cladding Refraction', 'Critical Angle'])
