@@ -64,6 +64,7 @@ def speedOfLightSilicon(wavelength): # v = c / n
     velocity = speedOfLight / coreRefractionIndex(wavelength) 
     return velocity
 
+
 def photonEnergy(wavelength): # e = h * c / wl
     energy = planksConstant *  speedOfLightSilicon(wavelength) / wavelength
     return energy
